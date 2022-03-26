@@ -1,0 +1,39 @@
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: var(--theme-background-85);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--theme-transition-fast), visibility var(--theme-transition-fast);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .loading--linear {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        nav.mdc-linear-progress {
+            height: 6px;
+
+            .mdc-linear-progress__bar-inner {
+                border-top-width: 6px;
+                background: var(--theme-primary);
+            }
+        }
+    }
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}

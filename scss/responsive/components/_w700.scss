@@ -1,0 +1,36 @@
+.message__list {
+    .message__list__item {
+        padding: 0 12px;
+        margin: 0 -12px;
+        height: 56px;
+
+        .message__icons {
+            .message__icon {
+                display: none;
+            }
+        }
+
+        .message__leading {
+            display: block;
+
+            .message__sender {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+        }
+
+        .message__text {
+            display: none;
+        }
+    }
+
+    .message__list__item,
+    .message__list__item:first-child,
+    .message__list__item:last-child {
+        border-radius: 12px;
+    }
+}
+
+.compose-email {
+    padding: 0;
+}

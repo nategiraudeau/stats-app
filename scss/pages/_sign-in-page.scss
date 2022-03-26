@@ -1,0 +1,98 @@
+.sign-in {
+    overflow: hidden;
+    height: 100vh;
+    margin: auto;
+    width: 80vw;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: fade-in var(--theme-transition-slow);
+
+    .sign-in__inputs {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-radius: 24px;
+    }
+
+    .sign-in__field,
+    .sign-in__submit {
+        height: 48px;
+        box-sizing: border-box;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        transition: background-color var(--theme-transition-fast);
+    }
+
+    .sign-in__field,
+    .sign-in__field:-webkit-autofill {
+        background: var(--theme-foreground-5) !important;
+        color: var(--theme-foreground) !important;
+        border: none;
+        outline: none;
+        padding: 0 28px;
+        width: 320px;
+        font-weight: 400;
+    }
+
+    .sign-in__field:not(:last-child) {
+        margin-bottom: 6px;
+    }
+
+    .sign-in__field:hover,
+    .sign-in__field:-webkit-autofill:hover {
+        background: var(--theme-foreground-8) !important;
+    }
+
+    .sign-in__field:focus,
+    .sign-in__field:-webkit-autofill:focus {
+        background: var(--theme-foreground-10) !important;
+    }
+
+    .sign-in__submit {
+        margin-top: 18px;
+        width: 100%;
+        border: none;
+        outline: none;
+        justify-content: center;
+        cursor: pointer;
+        background: var(--theme-primary);
+        color: white;
+        font-weight: 700;
+    }
+
+    .sign-in__submit:hover {
+        background: var(--theme-primary-dark);
+    }
+
+    .sign-in__submit:active {
+        transition: background-color var(--theme-transition-faster);
+        background: var(--theme-primary-darker);
+    }
+}
+
+.sign-in.wrong {
+    .sign-in__submit,
+    .sign-in__field {
+        animation: incorrect-sign-in var(--theme-transition-slow);
+    }
+}
+
+@keyframes incorrect-sign-in {
+    0% {
+        transform: none;
+    }
+    20% {
+        transform: translateX(-10px);
+    }
+    40% {
+        transform: translateX(10px);
+    }
+    60% {
+        transform: translateX(-10px);
+    }
+}

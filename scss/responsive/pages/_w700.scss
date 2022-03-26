@@ -1,0 +1,20 @@
+.content-page {
+    .content-page__header {
+        padding: 0;
+        margin: 12px 0 16px;
+
+        .content-page__icon {
+            margin-right: 12px;
+            transform: translateY(2px);
+            color: var(--theme-primary);
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    .content-page__header::after {
+        display: none;
+    }
+}

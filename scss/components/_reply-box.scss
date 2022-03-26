@@ -1,0 +1,52 @@
+.message-page__box-container {
+    position: relative;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    transition: visibility var(--theme-transition-faster), opacity var(--theme-transition-faster);
+}
+
+.reply-box {
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 0 2px 18px 18px;
+    // border: 2px solid rgba(#212731, 0.05);
+    border: 1px solid var(--theme-foreground-10);
+    // box-shadow: 0 6px 8px -4px rgba(#212731, 0.25);
+    margin-left: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--theme-background);
+
+    .reply-box__header {
+        padding: 12px 12px 0 0;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.reply-box::after {
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    height: 80px;
+    width: 40px;
+}
+
+.message-page__box-container.show {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    transition: visibility var(--theme-transition-fast), opacity var(--theme-transition-fast);
+
+    .reply-box {
+        animation: slide-up var(--theme-transition-slow) var(--theme-easing-burst),
+            fade-in var(--theme-transition-fast);
+    }
+}

@@ -1,0 +1,48 @@
+.content-page {
+    // background-color: var(--theme-background-40);
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    // border: 2px solid var(--theme-foreground-5);
+    padding: 72px 48px;
+    box-sizing: border-box;
+    transition: background-color var(--theme-transition-slow) var(--theme-easing-smooth);
+    // backdrop-filter: blur(25px);
+
+    .content-page__header {
+        display: inline-flex;
+        align-items: center;
+        padding: 0 0 12px;
+        margin: 0 0 20px;
+        position: relative;
+
+        h2 {
+            font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-size: 28px;
+            transition: color var(--theme-transition-slow) var(--theme-easing-smooth);
+        }
+    }
+
+    .content-page__header::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 5px;
+        max-width: 80px;
+        background: var(--theme-primary);
+        border-radius: 4px 4px 1px 1px;
+    }
+
+    .nothing-here {
+        opacity: 0.5;
+        font-size: 16px;
+        margin-top: 12px;
+    }
+}

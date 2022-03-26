@@ -1,0 +1,17 @@
+@media (max-width: 700px) {
+    @import "layout/w700";
+    @import "pages/w700";
+    @import "components/w700";
+}
+
+@media (min-width: 701px) {
+    .w700 {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .not-w700 {
+        display: none;
+    }
+}

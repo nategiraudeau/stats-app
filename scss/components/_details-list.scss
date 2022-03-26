@@ -1,0 +1,39 @@
+.details-list {
+    padding: 0 4px;
+
+    .detail {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        margin: 8px 0;
+
+        .key {
+            font-weight: 500;
+            color: var(--theme-foreground-30);
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+
+        .value {
+            color: var(--theme-foreground);
+            white-space: nowrap;
+
+            .value__double {
+                display: flex;
+                align-items: center;
+
+                .value__bold {
+                    font-weight: 600;
+                    margin-right: 5px;
+                    white-space: nowrap;
+                }
+
+                .value__light {
+                    opacity: 0.6;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

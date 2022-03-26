@@ -1,0 +1,227 @@
+@import "../utils";
+
+.tasks {
+    --height: 44px;
+    --half-height: 22px;
+    --border-radius: 8px;
+
+    --theme-blue-transparent-most: rgba(33, 150, 243, 0.05);
+    --theme-blue-transparent-more: rgba(33, 150, 243, 0.1);
+    --theme-blue-transparent: rgba(33, 150, 243, 0.2);
+    --theme-blue-transparent-30: rgba(33, 150, 243, 0.3);
+    --theme-blue-transparent-40: rgba(33, 150, 243, 0.4);
+    --theme-blue-transparent-60: rgba(33, 150, 243, 0.6);
+    --theme-blue-lightest: #90caf9;
+    --theme-blue-lighter: #64b5f6;
+    --theme-blue-light: #42a5f5;
+    --theme-blue: #2196f3;
+    --theme-blue-dark: #1b80d8;
+    --theme-blue-darker: #1565c0;
+    --theme-blue-darkest: #0d47a1;
+
+    .tasks__tabs {
+        display: flex;
+        align-items: center;
+        margin: 0 -8px;
+
+        .tasks__tab {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: var(--height);
+            border-radius: var(--border-radius);
+            cursor: default;
+            background: var(--theme-foreground-3);
+            padding: 0 20px;
+            margin: 0 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color var(--theme-transition-fast),
+                border-radius var(--theme-transition);
+            color: var(--theme-foreground-50);
+
+            .count {
+                font-weight: 700;
+            }
+        }
+
+        .tasks__tab::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color);
+            border-radius: 1px;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform var(--theme-transition) var(--theme-easing-smooth),
+                opacity var(--theme-transition-fast);
+        }
+
+        .tasks__tab:first-child {
+            border-top-left-radius: var(--half-height);
+            border-bottom-left-radius: var(--half-height);
+            margin: 0 4px 0 0;
+            padding: 0 20px 0 24px;
+        }
+
+        .tasks__tab:last-child {
+            border-top-right-radius: var(--half-height);
+            border-bottom-right-radius: var(--half-height);
+            margin: 0 0 0 4px;
+            padding: 0 24px 0 20px;
+        }
+
+        .tasks__tab.complete {
+            --color: var(--theme-primary);
+            background: var(--theme-primary-transparent-more);
+            cursor: pointer;
+            color: var(--theme-foreground);
+
+            .count {
+                color: var(--theme-primary-dark);
+            }
+        }
+
+        .tasks__tab.complete:hover {
+            background: var(--theme-primary-transparent);
+        }
+
+        .tasks__tab.complete:active {
+            transition: background-color var(--theme-transition-faster);
+            background: var(--theme-primary-transparent-30);
+        }
+
+        .tasks__tab.in-progress {
+            --color: var(--theme-blue);
+            background: var(--theme-blue-transparent-most);
+            cursor: pointer;
+            color: var(--theme-foreground);
+
+            .count {
+                color: var(--theme-blue);
+            }
+        }
+
+        .tasks__tab.in-progress:hover {
+            background: var(--theme-blue-transparent-more);
+        }
+
+        .tasks__tab.in-progress:active {
+            transition: background-color var(--theme-transition-faster);
+            background: var(--theme-blue-transparent);
+        }
+
+        .tasks__tab.incomplete {
+            --color: var(--theme-red);
+            background: var(--theme-red-transparent-most);
+            cursor: pointer;
+            color: var(--theme-foreground);
+
+            .count {
+                color: var(--theme-red);
+            }
+        }
+
+        .tasks__tab.incomplete:hover {
+            background: var(--theme-red-transparent-more);
+        }
+
+        .tasks__tab.incomplete:active {
+            transition: background-color var(--theme-transition-faster);
+            background: var(--theme-red-transparent);
+        }
+
+        .tasks__tab.primary {
+            background: var(--theme-primary);
+            color: var(--theme-background);
+            cursor: pointer;
+            transition: opacity var(--theme-transition-fast);
+        }
+
+        .tasks__tab.primary:hover {
+            opacity: 0.8;
+        }
+
+        .tasks__tab.primary:active {
+            opacity: 0.5;
+        }
+
+        // .tasks__tab.current {
+        //     border-bottom-left-radius: 2px;
+        //     border-bottom-right-radius: 2px;
+        // }
+
+        // .tasks__tab.current::after {
+        //     transform: none;
+        //     opacity: 1;
+        // }
+    }
+
+    .tasks__create__bg {
+        @include bg;
+        @include fade-out;
+    }
+
+    .tasks__create__bg.show {
+        @include fade-in;
+    }
+
+    .tasks__create__container {
+        z-index: 4;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .tasks__create__container.show {
+        pointer-events: all;
+    }
+
+    .tasks__create {
+        width: 95vw;
+        max-width: 440px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--theme-card);
+        padding: 32px 0;
+        border-radius: 20px;
+    }
+}
+
+.theme--dark .tasks .tasks__tabs {
+    .tasks__tab.in-progress {
+        background: var(--theme-blue-transparent-more);
+    }
+
+    .tasks__tab.in-progress:hover {
+        background: var(--theme-blue-transparent);
+    }
+
+    .tasks__tab.in-progress:active {
+        background: var(--theme-blue-transparent-30);
+    }
+
+    .tasks__tab.incomplete {
+        background: var(--theme-red-transparent-more);
+    }
+
+    .tasks__tab.incomplete:hover {
+        background: var(--theme-red-transparent);
+    }
+
+    .tasks__tab.incomplete:active {
+        background: var(--theme-red-transparent-30);
+    }
+}

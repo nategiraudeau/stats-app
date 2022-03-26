@@ -1,0 +1,44 @@
+@import "../utils";
+
+.sender-image {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--theme-foreground-10);
+
+    .sender-image__stack {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        opacity: 0;
+        transition: opacity var(--theme-transition-fast);
+
+        .sender-image__img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sender-image__name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            @include flex-center;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--theme-background);
+            background: var(--theme-avatar);
+        }
+    }
+}
+
+.sender-image--loaded {
+    .sender-image__stack {
+        opacity: 1;
+    }
+}

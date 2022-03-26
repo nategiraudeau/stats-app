@@ -1,0 +1,42 @@
+@use "theme";
+@use "utils";
+
+@import "layout/index";
+@import "components/index";
+@import "pages/index";
+@import "theme";
+
+* {
+    min-width: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    background: var(--theme-background);
+    transition: background-color var(--theme-transition-slow) var(--theme-easing-smooth);
+}
+
+body,
+button,
+input,
+textarea,
+label {
+    font-family: "Inter", sans-serif;
+    color: var(--theme-foreground);
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: var(--theme-foreground-15);
+}

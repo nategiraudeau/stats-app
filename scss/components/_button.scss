@@ -1,0 +1,81 @@
+@import "../utils";
+
+.button {
+    @include flex-center;
+    height: 44px;
+    padding: 0 28px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    background: none;
+    transition: color var(--theme-transition-fast);
+    overflow: hidden;
+    background: transparent;
+    border-radius: 22px;
+    // box-shadow: 8px 12px 18px -5px rgba(20, 74, 250, 0.5);
+}
+
+.button::after {
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 22px;
+    z-index: -1;
+    background: rgba(black, 0.1);
+    transition: transform var(--theme-transition-slow) var(--theme-easing-smooth),
+        border-color var(--theme-transition-fast), background-color var(--theme-transition-fast);
+}
+
+// .button:hover::after {
+//     transform: scale(1.05);
+// }
+
+// Primary
+
+.button.button--primary {
+    color: white;
+}
+
+.button.button--primary::after {
+    background: var(--theme-primary);
+}
+
+.button.button--primary:hover::after {
+    background: var(--theme-primary-dark);
+}
+
+.button.button--primary:active::after {
+    transition: background-color var(--theme-transition-faster);
+    background: var(--theme-primary-darker);
+}
+
+// Secondary
+
+.button.button--secondary {
+    color: var(--theme-foreground);
+}
+
+.button.button--secondary::after {
+    background: transparent;
+    border: 1px solid rgba(black, 0.05);
+}
+
+.button.button--secondary:hover {
+    color: var(--theme-primary);
+}
+
+.button.button--secondary:hover::after {
+    background: var(--theme-primary-transparent-most);
+    border-color: var(--theme-primary-lightest);
+}
+
+.button.button--secondary:active::after {
+    transition: background-color var(--theme-transition-faster);
+    background: var(--theme-primary-transparent-more);
+}

@@ -1,0 +1,30 @@
+.menu {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    margin: -4px;
+
+    .menu__link {
+        padding: 6px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        transition: color var(--theme-transition-fast),
+            background-color var(--theme-transition-fast);
+
+        .menu__link__icon {
+            margin-right: 8px;
+        }
+    }
+
+    .menu__link:hover {
+        background: var(--theme-primary-transparent-most);
+        color: var(--theme-primary-dark);
+    }
+
+    .menu__link:active {
+        transition: background-color var(--theme-transition-faster);
+        background: var(--theme-primary-transparent-more);
+        color: var(--theme-primary-dark);
+    }
+}

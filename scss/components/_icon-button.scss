@@ -1,0 +1,69 @@
+@import "../utils";
+
+.icon-button {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color var(--theme-transition-fast), color var(--theme-transition-fast),
+        transform var(--theme-transition-slowest) var(--theme-easing-smooth);
+}
+
+.icon-button.lg {
+    width: 48px;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+.icon-button:hover {
+    background: var(--theme-foreground-8);
+}
+
+.icon-button:active {
+    transition: background-color var(--theme-transition-faster);
+    background: var(--theme-foreground-15);
+}
+
+.icon-button.icon-button--light {
+    color: white;
+}
+
+.icon-button.icon-button--light:hover {
+    background: rgba(white, 0.08);
+}
+
+.icon-button.icon-button--light:active {
+    transition: background-color var(--theme-transition-faster);
+    background: rgba(white, 0.15);
+}
+
+.icon-button.favorite {
+    width: 36px;
+    height: 36px;
+    color: var(--theme-favorite);
+    transform: rotate(143deg);
+}
+
+.icon-button.favorite:hover {
+    background-color: var(--theme-favorite-transparent-more);
+}
+
+.icon-button.favorite:active {
+    background-color: var(--theme-favorite-transparent);
+}
+
+.icon-button.icon-button--primary {
+    background: var(--theme-primary);
+    color: white;
+}
+
+.icon-button.icon-button--primary:hover {
+    background: var(--theme-primary-dark);
+}
+
+.icon-button.icon-button--primary:active {
+    background: var(--theme-primary-darker);
+}
