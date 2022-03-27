@@ -72,7 +72,7 @@ const EditProfile: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                     if (user.name !== name) updateData.name = name;
                     if (user.position !== position) updateData.position = position || null;
 
-                    if (Number.parseInt(number.toString()) || Number.parseInt(number.toString()) === 0) updateData.number = number;
+                    if (Number.parseInt(number?.toString()) || Number.parseInt(number?.toString()) === 0) updateData.number = number;
                     else if (number === undefined) updateData.number = null;
 
                     await db.collection('users').doc(userId).update(updateData);
