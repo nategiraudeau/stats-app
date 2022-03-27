@@ -83,7 +83,8 @@ const EditPfp: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                             return;
                         }
                         else {
-                            await storage.refFromURL(user.pfp).delete();
+                            if (user.pfp) await storage.refFromURL(user.pfp).delete();
+
                             await db.collection('users').doc(userId).update({ pfp: newPfp });
                         }
                     }

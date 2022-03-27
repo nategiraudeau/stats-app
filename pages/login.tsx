@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import LoadingOverlay from '../components/loading-overlay';
@@ -57,6 +58,19 @@ const LogIn: React.FC = () => {
                     value="Go"
                     className="sign-in__submit" />
             </form>
+            <Link href="/sign-up">
+                <small style={{
+                    padding: '6px',
+                    marginTop: '6px',
+                    color: 'var(--theme-foreground-60)',
+                    cursor: 'pointer'
+                }}>Don't have an account? <span style={{
+                    color: 'var(--theme-primary)',
+                    fontWeight: 700,
+                    textDecoration: 'underline',
+                    cursor: 'pointer'
+                }}>Sign Up</span></small>
+            </Link>
             <LoadingOverlay loading={loading} type="linear" />
         </div>
     );

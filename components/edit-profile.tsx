@@ -27,7 +27,7 @@ const EditProfile: React.FC<{ cancel: () => void }> = ({ cancel }) => {
 
     const user = data.users.find(u => u.id === userId);
     const ready = name && (user.name !== name || user.position !== position || user.number !== number)
-        && (!number || Number.parseInt(number.toString()));
+        && (number === undefined || Number.parseInt(number.toString()));
 
     return (
         <div className='column edit-pfp' key={user.name + user.number + user.position}>
@@ -47,7 +47,10 @@ const EditProfile: React.FC<{ cancel: () => void }> = ({ cancel }) => {
             <div className="v-spacing--sm"></div>
             <input
                 value={number}
-                onChange={e => setNumber(Number.parseInt(e.currentTarget.value) || undefined)}
+                onChange={e => {
+                    const n = Number.parseInt(e.currentTarget.value);
+                    setNumber(n || n === 0 ? n : undefined);
+                }}
                 type="text"
                 placeholder="Your Number, e.g. 5" />
             <br />
@@ -69,7 +72,7 @@ const EditProfile: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                     if (user.name !== name) updateData.name = name;
                     if (user.position !== position) updateData.position = position || null;
 
-                    if (number !== undefined && user.number !== number) updateData.number = number;
+                    if (Number.parseInt(number.toString()) || Number.parseInt(number.toString()) === 0) updateData.number = number;
                     else if (number === undefined) updateData.number = null;
 
                     await db.collection('users').doc(userId).update(updateData);

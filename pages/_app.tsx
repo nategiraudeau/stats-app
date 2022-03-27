@@ -24,8 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 name: doc.data().name,
                 stats: doc.data().stats,
                 position: doc.data().position || undefined,
-                number: doc.data().number || undefined,
-                pfp: doc.data().pfp || undefined
+                number: doc.data().number === 0 ? 0 : doc.data().number || undefined,
+                pfp: doc.data().pfp || undefined,
+                updateCount: doc.data().updateCount || 0
             }));
 
             if (!deepEqual(_users, users)) {

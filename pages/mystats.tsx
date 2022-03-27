@@ -86,7 +86,7 @@ const MyStats: React.FC = () => {
                 </DialogButton>
                 <br />
                 <div className="row h-align--space number">
-                    {user.number ? `#${user.number}` : (
+                    {user.number !== undefined ? `#${user.number}` : (
                         <DialogButton content={(cancel) => [<EditProfile cancel={cancel} />]}>
                             <div className="row quicklink">
                                 <Icons.Plus size={18} />

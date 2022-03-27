@@ -47,7 +47,10 @@ const CreateStats: React.FC<{ cancel: () => void }> = ({ cancel }) => {
             input: (
                 <input
                     value={games}
-                    onChange={e => setGames(Number.parseInt(e.currentTarget.value) || undefined)}
+                    onChange={e => {
+                        const n = Number.parseInt(e.currentTarget.value);
+                        setGames(n || n === 0 ? n : undefined);
+                    }}
                     type="text"
                     placeholder="# Games" />
             ),
@@ -62,12 +65,18 @@ const CreateStats: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                 }}>
                     <input
                         value={goals}
-                        onChange={e => setGoals(Number.parseInt(e.currentTarget.value) || undefined)}
+                        onChange={e => {
+                            const n = Number.parseInt(e.currentTarget.value);
+                            setGoals(n || n === 0 ? n : undefined);
+                        }}
                         type="text"
                         placeholder="# Goals" />
                     <input
                         value={assists}
-                        onChange={e => setAssists(Number.parseInt(e.currentTarget.value) || undefined)}
+                        onChange={e => {
+                            const n = Number.parseInt(e.currentTarget.value);
+                            setAssists(n || n === 0 ? n : undefined);
+                        }}
                         type="text"
                         placeholder="# Assists" />
                 </div>
@@ -125,7 +134,7 @@ const CreateStats: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                         onClick={async () => {
                             if (!step.ready) return;
                             else if (final) {
-                                if (!name || !color || !games || !goals || !assists || !userId) return;
+                                if (!name || !color || games === undefined || goals === undefined || assists === undefined || !userId) return;
                                 setLoading(true);
                                 const id = uuid();
                                 try {
@@ -142,7 +151,8 @@ const CreateStats: React.FC<{ cancel: () => void }> = ({ cancel }) => {
 
                                 try {
                                     await db.collection('users').doc(userId).update({
-                                        stats
+                                        stats,
+                                        updateCount: Math.random()
                                     });
                                 } catch (e) { setLoading(false); return; }
 

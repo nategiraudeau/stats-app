@@ -7,6 +7,7 @@ export default interface User {
     pfp?: string,
     position?: string,
     number?: number,
+    updateCount?: number,
     stats: {
         [key: string]: Stats
     }
