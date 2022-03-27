@@ -82,7 +82,10 @@ const EditPfp: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                             setLoading(false);
                             return;
                         }
-                        else await db.collection('users').doc(userId).update({ pfp: newPfp });
+                        else {
+                            await storage.refFromURL(user.pfp).delete();
+                            await db.collection('users').doc(userId).update({ pfp: newPfp });
+                        }
                     }
                     cancel();
                     setLoading(false);

@@ -12,7 +12,7 @@ import Stats from '../models/stats';
 import { useAuth } from '../providers/auth-provider';
 import { useData } from '../providers/data-provider';
 import copyTextToClipboard from '../utils/copyToClipboard';
-import updateGoals from '../utils/updateGoals';
+import updateGoals, { updateAssists, updateGames } from '../utils/updateGoals';
 
 const MyStats: React.FC = () => {
     const authState = useAuth();
@@ -37,16 +37,18 @@ const MyStats: React.FC = () => {
     if (!user) return (<div />);
     if (!Object.keys(user.stats).length) return (
         <div className="no-stats">
-            <div className="profile-image edit">
-                {user.pfp ? (
-                    <Img src={user.pfp} alt=""></Img>
-                ) : (
-                    <h1>{user.name[0].toUpperCase()}</h1>
-                )}
-                <div className="row edit-button">
-                    <Icons.Edit3 size={14} /> Edit
+            <DialogButton content={(cancel) => [<EditPfp cancel={cancel} />]}>
+                <div className="profile-image edit">
+                    {user?.pfp ? (
+                        <Img src={user?.pfp} alt=""></Img>
+                    ) : (
+                        <h1>{user?.name?.charAt(0)?.toUpperCase()}</h1>
+                    )}
+                    <div className="row edit-button">
+                        <Icons.Edit3 size={14} /> Edit
+                    </div>
                 </div>
-            </div>
+            </DialogButton>
             <h2>Get Started</h2>
             <p>Set up your stats</p>
             <DialogButton content={(c) => [<CreateStats cancel={c} />]}>
@@ -161,10 +163,6 @@ const MyStats: React.FC = () => {
             <div className="stats-divider"></div>
             <div className="stats-data">
                 <div className="summary-row">
-                    <div className="summary games">
-                        <b>{games}</b>
-                        <div className="summary__sub">Game{games === 1 ? '' : 's'}</div>
-                    </div>
                     <div className="summary goals">
                         <b>{goals}</b>
                         <div className="summary__sub">Goal{goals === 1 ? '' : 's'}</div>
@@ -172,6 +170,10 @@ const MyStats: React.FC = () => {
                     <div className="summary assists">
                         <b>{assists}</b>
                         <div className="summary__sub">Assist{assists === 1 ? '' : 's'}</div>
+                    </div>
+                    <div className="summary games">
+                        <b>{games}</b>
+                        <div className="summary__sub">Game{games === 1 ? '' : 's'}</div>
                     </div>
                 </div>
                 <br />
@@ -229,7 +231,7 @@ const MyStats: React.FC = () => {
                                                     _stats[t].assists--;
                                                     if (_stats[t].assists < 0) _stats[t].assists = 0;
                                                     setStats({ ...stats, _stats });
-                                                    updateGoals(authState, t, _stats[t].assists);
+                                                    updateAssists(authState, t, _stats[t].assists);
                                                 }}>
                                                     <Icons.Minus />
                                                 </div>
@@ -237,7 +239,7 @@ const MyStats: React.FC = () => {
                                                     let _stats = stats;
                                                     _stats[t].assists++;
                                                     setStats({ ...stats, _stats });
-                                                    updateGoals(authState, t, _stats[t].assists);
+                                                    updateAssists(authState, t, _stats[t].assists);
                                                 }}>
                                                     <Icons.Plus />
                                                 </div>
@@ -252,7 +254,7 @@ const MyStats: React.FC = () => {
                                                     _stats[t].games--;
                                                     if (_stats[t].games < 0) _stats[t].games = 0;
                                                     setStats({ ...stats, _stats });
-                                                    updateGoals(authState, t, _stats[t].games);
+                                                    updateGames(authState, t, _stats[t].games);
                                                 }}>
                                                     <Icons.Minus />
                                                 </div>
@@ -260,7 +262,7 @@ const MyStats: React.FC = () => {
                                                     let _stats = stats;
                                                     _stats[t].games++;
                                                     setStats({ ...stats, _stats });
-                                                    updateGoals(authState, t, _stats[t].games);
+                                                    updateGames(authState, t, _stats[t].games);
                                                 }}>
                                                     <Icons.Plus />
                                                 </div>
