@@ -16,7 +16,9 @@ const SignUp: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    if (authState) router.push('/');
+    if (authState) router.push('/mystats');
+
+    if (authState === undefined) return (<div />);
 
     return (
         <div className="sign-in">
@@ -50,7 +52,7 @@ const SignUp: React.FC = () => {
                     await db.collection('users').doc(uid).set(user);
                 } catch (_) { }
 
-                router.push('/');
+                router.push('/mystats');
                 setLoading(false);
             }} className="sign-in__inputs">
                 <input

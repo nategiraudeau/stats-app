@@ -3,6 +3,14 @@ import { _auth as auth } from '../firebase';
 
 export default auth;
 
+export async function logOut(onError?: (e: any) => void) {
+    try {
+        await auth.signOut();
+    } catch (e) {
+        if (onError) onError(e);
+    }
+}
+
 export type AuthState = string | null | undefined;
 
 const AuthContext = React.createContext<AuthState>(undefined);

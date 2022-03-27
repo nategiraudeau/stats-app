@@ -9,7 +9,8 @@
     cursor: pointer;
     flex-shrink: 0;
     transition: background-color var(--theme-transition-fast), color var(--theme-transition-fast),
-        transform var(--theme-transition-slowest) var(--theme-easing-smooth);
+        transform var(--theme-transition-slowest) var(--theme-easing-smooth),
+        opacity var(--theme-transition-fast);
 }
 
 .icon-button.lg {
@@ -66,4 +67,19 @@
 
 .icon-button.icon-button--primary:active {
     background: var(--theme-primary-darker);
+}
+
+.icon-button.disabled,
+.icon-button.disabled:hover,
+.icon-button.disabled:active {
+    opacity: 0.3;
+    cursor: default;
+    background: transparent;
+    color: var(--theme-foreground);
+}
+
+.icon-button.hidden,
+.icon-button.hidden:hover,
+.icon-button.hidden:active {
+    opacity: 0;
 }

@@ -5,6 +5,7 @@ export default interface User {
     email: string,
     name: string,
     pfp?: string,
+    position?: string,
     stats: {
         [key: string]: Stats
     }

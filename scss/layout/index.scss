@@ -1,181 +1,24 @@
-.__layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 40px 40px;
+._wrapper {
+    margin: auto;
+    width: 95%;
     max-width: 900px;
-    margin: 0 auto;
-    min-height: 101vh;
+}
 
-    @media (min-width: 1450px) {
-        max-width: 1100px;
-    }
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 95px;
 
-    @media (max-width: 700px) {
-        padding: 0 20px 40px;
-
-        .ep-title {
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: flex-start;
-
-            h1 {
-                margin: 12px 0;
-            }
-        }
-    }
-
-    .header {
+    .left h1 {
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 80px 0 40px;
-
-        @media (max-width: 700px) {
-            padding: 40px 0 20px;
-        }
-
-        .header__logo {
-            height: 150px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-
-            @media (max-width: 700px) {
-                height: 100px;
-            }
-        }
-
-        .header__logo:hover {
-            opacity: 0.7;
-        }
+        gap: 12px;
     }
 
-    .episode-page {
-        width: 100%;
-        box-sizing: border-box;
-
-        .info {
-            transition: opacity var(--theme-transition-slow), visibility var(--theme-transition-slow);
-            transition-delay: 0.15s;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .info.ready {
-            opacity: 1;
-            visibility: visible;
-
-            h1 {
-                margin: 12px 0 6px;
-            }
-        }
-
-        .episode {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(white, 0.1);
-            color: rgba(white, 0.6);
-            font-size: 20px;
-            height: 34px;
-            border-radius: 17px;
-            padding: 0 12px;
-        }
-    }
-}
-
-.__layout::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 500px;
-    height: 500px;
-    background: var(--theme-primary-lightest);
-    z-index: -1;
-    transform: translate(-50%, -110%);
-    filter: blur(200px);
-
-    @media (max-width: 700px) {
-        width: 80vw;
-        height: 80vw;
-        filter: blur(45vw);
-        transform: translate(-50%, -90%);
-    }
-}
-
-.about {
-    display: block;
-    margin: 80px 0;
-    padding: 40px;
-    background: var(--theme-primary-light);
-    border-radius: 12px;
-    color: var(--theme-background);
-}
-
-.video-player {
-    position: relative;
-    width: 100%;
-
-    .video-player__image {
-        width: 100%;
-        border-radius: 12px;
-        cursor: pointer;
-    }
-
-    .video-player__play-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.2);
+    .navbar__links {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        cursor: pointer;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity var(--theme-transition), background-color 0.2s;
-
-        svg {
-            transition: transform var(--theme-transition-fast) var(--theme-easing-smooth);
-        }
-    }
-
-    .video-player__play-icon.ready {
-        opacity: 1;
-    }
-
-    .video-player__image:hover + .video-player__play-icon, .video-player__play-icon:hover {
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-
-    .video-player__image:active + .video-player__play-icon, .video-player__play-icon:active {svg{
-            transform: scale(0.8);
-        }
-    }
-
-    video {
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: 12px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity var(--theme-transition-slow), visibility var(--theme-transition-slow);
-    }
-
-    video.playing {
-        opacity: 1;
-        visibility: visible;
+        gap: 12px;
     }
 }

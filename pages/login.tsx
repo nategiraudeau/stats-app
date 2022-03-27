@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import LoadingOverlay from '../components/loading-overlay';
-import db from '../database/db';
-import User from '../models/user';
 import auth, { useAuth } from '../providers/auth-provider';
 import validateEmailAdress from '../utils/validate-email-adress';
 
@@ -15,7 +13,9 @@ const LogIn: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    if (authState) router.push('/');
+    if (authState) router.push('/mystats');
+
+    if (authState === undefined) return (<div />);
 
     return (
         <div className="sign-in">
@@ -32,7 +32,7 @@ const LogIn: React.FC = () => {
                     await auth.signInWithEmailAndPassword(email, password);
                 } catch (_) { }
 
-                router.push('/');
+                router.push('/mystats');
                 setLoading(false);
             }} className="sign-in__inputs">
                 <input
