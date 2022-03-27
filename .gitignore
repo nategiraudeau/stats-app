@@ -1,0 +1,5 @@
+node_modules
+.firebaserc
+.DS_Store
+.next
+firebase-config.json
