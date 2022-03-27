@@ -201,8 +201,9 @@ const MyStats: React.FC = () => {
                                             <div className="toggle__button icon-button minus" onClick={_ => {
                                                 let _stats = stats;
                                                 _stats[t].goals--;
+                                                if (_stats[t].goals < 0) _stats[t].goals = 0;
                                                 setStats({ ...stats, _stats });
-                                                updateGoals(authState, t, -1);
+                                                updateGoals(authState, t, _stats[t].goals);
                                             }}>
                                                 <Icons.Minus />
                                             </div>
@@ -210,7 +211,7 @@ const MyStats: React.FC = () => {
                                                 let _stats = stats;
                                                 _stats[t].goals++;
                                                 setStats({ ...stats, _stats });
-                                                updateGoals(authState, t, 1);
+                                                updateGoals(authState, t, _stats[t].goals);
                                             }}>
                                                 <Icons.Plus />
                                             </div>
@@ -222,10 +223,48 @@ const MyStats: React.FC = () => {
                                     </div>
                                     <div className="other">
                                         <div className="other-stat">
+                                            <div className="toggle">
+                                                <div className="toggle__button icon-button sm minus" onClick={_ => {
+                                                    let _stats = stats;
+                                                    _stats[t].assists--;
+                                                    if (_stats[t].assists < 0) _stats[t].assists = 0;
+                                                    setStats({ ...stats, _stats });
+                                                    updateGoals(authState, t, _stats[t].assists);
+                                                }}>
+                                                    <Icons.Minus />
+                                                </div>
+                                                <div className="toggle__button icon-button sm plus" onClick={_ => {
+                                                    let _stats = stats;
+                                                    _stats[t].assists++;
+                                                    setStats({ ...stats, _stats });
+                                                    updateGoals(authState, t, _stats[t].assists);
+                                                }}>
+                                                    <Icons.Plus />
+                                                </div>
+                                            </div>
                                             <h2>{stat.assists}</h2>
                                             <div className="desc">Assist{stat.assists === 1 ? '' : 's'}</div>
                                         </div>
                                         <div className="other-stat">
+                                            <div className="toggle">
+                                                <div className="toggle__button icon-button sm minus" onClick={_ => {
+                                                    let _stats = stats;
+                                                    _stats[t].games--;
+                                                    if (_stats[t].games < 0) _stats[t].games = 0;
+                                                    setStats({ ...stats, _stats });
+                                                    updateGoals(authState, t, _stats[t].games);
+                                                }}>
+                                                    <Icons.Minus />
+                                                </div>
+                                                <div className="toggle__button icon-button sm plus" onClick={_ => {
+                                                    let _stats = stats;
+                                                    _stats[t].games++;
+                                                    setStats({ ...stats, _stats });
+                                                    updateGoals(authState, t, _stats[t].games);
+                                                }}>
+                                                    <Icons.Plus />
+                                                </div>
+                                            </div>
                                             <h2>{stat.games}</h2>
                                             <div className="desc">Game{stat.games === 1 ? '' : 's'}</div>
                                         </div>

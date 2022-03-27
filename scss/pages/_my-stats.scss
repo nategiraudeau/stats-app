@@ -125,6 +125,10 @@
                         transform: translateX(-10%);
                         gap: 6px;
                         color: var(--theme-foreground);
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: visibility var(--theme-transition-fast),
+                            opacity var(--theme-transition-fast);
                     }
 
                     .goals-wrapper {
@@ -132,17 +136,13 @@
                         border-right: 1px solid var(--theme-foreground-20);
                         margin-right: 24px;
                         position: relative;
-
-                        .toggle {
-                            opacity: 0;
-                            transition: visibility var(--theme-transition-fast),
-                                opacity var(--theme-transition-fast);
-                        }
                     }
 
-                    .goals-wrapper:hover {
+                    .goals-wrapper:hover,
+                    .other .other-stat:hover {
                         .toggle {
                             opacity: 1;
+                            visibility: visible;
                         }
                     }
 
@@ -171,6 +171,12 @@
                             margin-bottom: 15px;
                             opacity: 0.8;
                             position: relative;
+
+                            .toggle {
+                                transform: none;
+                                justify-content: flex-end;
+                                gap: 4px;
+                            }
 
                             h2 {
                                 font-size: 28px;
