@@ -178,7 +178,7 @@ const MyStats: React.FC = () => {
                 <br />
                 <br />
                 <div className="stats-teams">
-                    {Object.keys(stats).sort().map(t => {
+                    {Object.keys(stats).sort().reverse().map(t => {
                         const team = data.teams.find(_t => _t.id === t);
                         if (!team) return (<div key={Math.random()} style={{ display: 'none' }} />);
                         const stat = stats[t];

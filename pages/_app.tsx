@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     useEffect(() => {
-        if (document.body.scrollHeight > window.innerHeight) {
+        if (document.body.scrollHeight > window.outerHeight) {
             document.body.style.paddingBottom = '80px';
         }
     }, []);

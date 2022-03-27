@@ -26,8 +26,8 @@ const Navbar: React.FC = () => {
     return (
         <div className="navbar">
             <div className="left">
-                <Link href="/"><h1 style={{ cursor: 'pointer' }}>
-                    <Icons.BarChart size={38} /> Soccer Stats
+                <Link href="/"><h1 style={{ cursor: 'pointer', fontSize: '22px', letterSpacing: '4px', margin: '22px 0' }}>
+                    <Icons.BarChart size={34} /> <div style={{ width: '4px' }}></div>SOCCER STATS
                 </h1></Link>
             </div>
             <div>

@@ -16,7 +16,10 @@ const SignUp: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    if (authState) router.push('/mystats');
+    if (authState) {
+        router.push('/mystats');
+        return <div />;
+    }
 
     if (authState === undefined) return (<div />);
 
