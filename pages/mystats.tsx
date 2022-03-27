@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import CreateStats from '../components/create-stats';
+import DialogAction from '../components/dialog-action';
 import DialogButton from '../components/dialog-button';
+import EditPfp from '../components/edit-pfp';
 import Icons from '../components/icons';
 import Img from '../components/img';
 import { useAuth } from '../providers/auth-provider';
 import { useData } from '../providers/data-provider';
+import copyTextToClipboard from '../utils/copyToClipboard';
 
 const MyStats: React.FC = () => {
     const authState = useAuth();
@@ -28,6 +31,9 @@ const MyStats: React.FC = () => {
                 ) : (
                     <h1>{user.name[0].toUpperCase()}</h1>
                 )}
+                <div className="row edit-button">
+                    <Icons.Edit3 size={14} /> Edit
+                </div>
             </div>
             <h2>Get Started</h2>
             <p>Set up your stats</p>
@@ -51,13 +57,18 @@ const MyStats: React.FC = () => {
     return (
         <div className="stats">
             <div className="user-details">
-                <div className="profile-image edit big">
-                    {user.pfp ? (
-                        <Img src={user.pfp} alt=""></Img>
-                    ) : (
-                        <h1>{user.name[0].toUpperCase()}</h1>
-                    )}
-                </div>
+                <DialogButton barrierDismissible content={(cancel) => [<EditPfp cancel={cancel} />]}>
+                    <div className="profile-image edit big">
+                        {user.pfp ? (
+                            <Img src={user.pfp} alt=""></Img>
+                        ) : (
+                            <h1>{user.name[0].toUpperCase()}</h1>
+                        )}
+                        <div className="row edit-button">
+                            <Icons.Edit3 size={14} /> Edit
+                        </div>
+                    </div>
+                </DialogButton>
                 <br />
                 <div className="number">#5</div>
                 <b>{user.name}</b>
@@ -73,15 +84,36 @@ const MyStats: React.FC = () => {
                         <Icons.Plus opacity={0} size={15} />
                     </div>
                 </DialogButton>
-                <DialogButton content={(
-                    <div>
-
+                <DialogButton barrierDismissible content={(_) => [(
+                    <div className='column'>
+                        <br />
+                        <h3>Copy the link to share</h3>
+                        <br />
+                        <small style={{
+                            fontSize: '12px',
+                            opacity: 0.5,
+                            whiteSpace: 'nowrap'
+                        }}>
+                            https://pro-stats.vercel.app/stats/{authState}
+                        </small>
+                        <br />
                     </div>
-                )}>
+                )]} actions={[
+                    (<DialogAction>
+                        Cancel
+                    </DialogAction>),
+                    (<DialogAction primary onClick={() => {
+                        copyTextToClipboard(`https://pro-stats.vercel.app/stats/${authState}`);
+                    }}>
+                        <Icons.Link2 size={20} />
+                        <div className="h-spacing"></div>
+                        Copy Link
+                    </DialogAction>)
+                ]}>
                     <div
                         className="button button--secondary"
                         style={{ width: '180px', boxSizing: 'border-box', whiteSpace: 'nowrap' }}>
-                        <Icons.Link2 />
+                        <Icons.Share />
                         <div className="h-spacing"></div>
                         Share Stats
                         <Icons.Plus opacity={0} size={10} />
@@ -106,7 +138,40 @@ const MyStats: React.FC = () => {
                 </div>
                 <br />
                 <br />
-                <div className="stats-data__divider"></div>
+                <br />
+                <div className="stats-teams">
+                    {Object.keys(stats).map(t => {
+                        const team = data.teams.find(_t => _t.id === t);
+                        if (!team) return (<div key={Math.random()} />);
+                        const stat = stats[t];
+                        return (
+                            <div key={t} className="stats__team">
+                                <div style={{ background: team.color }} className="top-color" />
+                                <h3>{team.name}</h3>
+                                <div className="stats__team__stats" style={{
+                                    color: team.color
+                                }}>
+                                    <div className="goals-wrapper">
+                                        <div className="goals">
+                                            <h2>{stat.goals}</h2>
+                                            <div className="desc">Goal{stat.goals === 1 ? '' : 's'}</div>
+                                        </div>
+                                    </div>
+                                    <div className="other">
+                                        <div className="other-stat">
+                                            <h2>{stat.assists}</h2>
+                                            <div className="desc">Assist{stat.assists === 1 ? '' : 's'}</div>
+                                        </div>
+                                        <div className="other-stat">
+                                            <h2>{stat.games}</h2>
+                                            <div className="desc">Game{stat.games === 1 ? '' : 's'}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

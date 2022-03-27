@@ -44,6 +44,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         return unsubscribeTeams;
     });
 
+    useEffect(() => {
+        if (document.body.scrollHeight > window.innerHeight) {
+            document.body.style.paddingBottom = '80px';
+        }
+    });
+
     const { pathname } = useRouter();
 
     return (

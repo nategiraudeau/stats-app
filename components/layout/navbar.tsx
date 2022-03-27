@@ -1,17 +1,27 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import User from '../../models/user';
 import { logOut, useAuth } from '../../providers/auth-provider';
+import { useData } from '../../providers/data-provider';
 import DialogAction from '../dialog-action';
 import DialogButton from '../dialog-button';
 import Icons from '../icons';
+import Img from '../img';
 import LoadingOverlay from '../loading-overlay';
 
 const Navbar: React.FC = () => {
     const authState = useAuth();
     const router = useRouter();
+    const data = useData();
+
+    let user: User = undefined;
 
     const [loading, setLoading] = useState(false);
+
+    if (authState) {
+        user = data?.users?.find(u => u.id === authState);
+    }
 
     return (
         <div className="navbar">
@@ -69,7 +79,7 @@ const Navbar: React.FC = () => {
                                         width: '44px',
                                         padding: 0
                                     }}>
-                                        <Icons.User />
+                                        {user?.pfp ? (<Img alt="" src={user.pfp} />) : user?.name?.charAt(0)?.toUpperCase()}
                                     </div>
                                 </DialogButton>
                             </div>

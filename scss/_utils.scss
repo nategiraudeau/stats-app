@@ -55,6 +55,12 @@
     align-items: center;
 }
 
+.column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 @keyframes slide-right {
     0% {
         transform: translateX(-100px);

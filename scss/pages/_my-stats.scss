@@ -39,7 +39,7 @@
         .summary-row {
             width: 100%;
             display: flex;
-            background-color: var(--theme-foreground-2);
+            background-color: var(--theme-foreground-5);
             height: 180px;
             align-items: center;
             box-sizing: border-box;
@@ -73,6 +73,79 @@
         .stats-data__divider {
             width: 100%;
             // border-top: 1px solid var(--theme-foreground-20);
+        }
+
+        .stats-teams {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-columns: calc(50% - 30px) calc(50% - 30px);
+            gap: 60px;
+
+            .stats__team {
+                display: block;
+                margin-bottom: 20px;
+
+                .top-color {
+                    height: 6px;
+                    border-radius: 4px 4px 2px 2px;
+                }
+
+                h3 {
+                    margin: 16px 0 24px;
+                }
+
+                .stats__team__stats {
+                    display: flex;
+                    height: 120px;
+                    align-items: center;
+
+                    .goals-wrapper {
+                        width: 100px;
+                        border-right: 1px solid var(--theme-foreground-20);
+                        margin-right: 24px;
+                    }
+
+                    .goals {
+                        display: inline-flex;
+                        flex-direction: column;
+                        align-items: center;
+                        flex-shrink: 0;
+
+                        h2 {
+                            font-size: 56px;
+                            margin: 0;
+                            color: var(--theme-foreground);
+                            text-align: center;
+                        }
+
+                        .desc {
+                            margin-top: 12px;
+                        }
+                    }
+
+                    .other {
+                        .other-stat {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 15px;
+                            opacity: 0.8;
+
+                            h2 {
+                                font-size: 28px;
+                                margin: 0 10px 0 0;
+                                width: 45px;
+                                text-align: center;
+                                color: var(--theme-foreground);
+                            }
+
+                            .desc {
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -175,8 +248,23 @@
     cursor: pointer;
     transition: background-color var(--theme-transition-fast);
 
+    h1 {
+        transform: translateY(-6px);
+    }
+
     img {
         transition: var(--theme-transition-fast);
+    }
+
+    .edit-button {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        gap: 6px;
+        font-size: 12px;
+        opacity: 0.6;
     }
 }
 
@@ -204,6 +292,12 @@
 
     h1 {
         font-size: 72px;
+    }
+
+    .edit-button {
+        bottom: 16px;
+        gap: 6px;
+        font-size: 14px;
     }
 }
 
