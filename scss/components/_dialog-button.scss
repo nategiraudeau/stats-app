@@ -1,6 +1,8 @@
 @import "../utils";
 
 .dialog-button {
+    color: var(--theme-foreground);
+
     .dialog-button__dialog__background {
         @include bg;
         @include fade-out;

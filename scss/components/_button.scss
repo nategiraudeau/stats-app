@@ -9,7 +9,7 @@
     cursor: pointer;
     position: relative;
     background: none;
-    transition: color var(--theme-transition-fast);
+    transition: color var(--theme-transition-fast), opacity var(--theme-transition-fast);
     overflow: hidden;
     background: transparent;
     border-radius: 22px;
@@ -39,6 +39,15 @@
 .button:active::after {
     transition: background-color var(--theme-transition-faster);
     background: var(--theme-foreground-20);
+}
+
+.button.button--danger:hover {
+    color: var(--theme-error);
+    background: var(--theme-error-transparent-more);
+}
+
+.button.button--danger:active {
+    background: var(--theme-error-transparent);
 }
 
 // Primary
@@ -86,4 +95,9 @@
 .button.button--secondary:active::after {
     transition: background-color var(--theme-transition-faster);
     background: var(--theme-primary-transparent-more);
+}
+
+.button.hidden {
+    opacity: 0;
+    cursor: default;
 }

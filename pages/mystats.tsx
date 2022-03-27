@@ -1,19 +1,31 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CreateStats from '../components/create-stats';
 import DialogAction from '../components/dialog-action';
 import DialogButton from '../components/dialog-button';
 import EditPfp from '../components/edit-pfp';
+import EditProfile from '../components/edit-profile';
+import EditTeam from '../components/edit-team';
 import Icons from '../components/icons';
 import Img from '../components/img';
+import Stats from '../models/stats';
 import { useAuth } from '../providers/auth-provider';
 import { useData } from '../providers/data-provider';
 import copyTextToClipboard from '../utils/copyToClipboard';
+import updateGoals from '../utils/updateGoals';
 
 const MyStats: React.FC = () => {
     const authState = useAuth();
     const router = useRouter();
     const data = useData();
+
+    const [stats, setStats] = useState<{
+        [key: string]: Stats
+    }>({});
+
+    useEffect(() => {
+        setStats(data?.users?.find(u => u.id === authState)?.stats || {});
+    }, [authState, data.users]);
 
     if (authState === null) router.push('/login');
     else if (!authState) return (<div />);
@@ -45,7 +57,6 @@ const MyStats: React.FC = () => {
         </div>
     );
 
-    const stats = user.stats;
     let games = 0, goals = 0, assists = 0;
     for (let key of Object.keys(stats)) {
         let stat = stats[key];
@@ -54,10 +65,12 @@ const MyStats: React.FC = () => {
         assists += stat.assists || 0;
     }
 
+    console.log(user.pfp);
+
     return (
         <div className="stats">
             <div className="user-details">
-                <DialogButton barrierDismissible content={(cancel) => [<EditPfp cancel={cancel} />]}>
+                <DialogButton content={(cancel) => [<EditPfp cancel={cancel} />]}>
                     <div className="profile-image edit big">
                         {user.pfp ? (
                             <Img src={user.pfp} alt=""></Img>
@@ -70,9 +83,34 @@ const MyStats: React.FC = () => {
                     </div>
                 </DialogButton>
                 <br />
-                <div className="number">#5</div>
+                <div className="row h-align--space number">
+                    {user.number ? `#${user.number}` : (
+                        <DialogButton content={(cancel) => [<EditProfile cancel={cancel} />]}>
+                            <div className="row quicklink">
+                                <Icons.Plus size={18} />
+                                <div className="h-spacing--sm"></div>
+                                Your Number
+                            </div>
+                        </DialogButton>
+                    )}
+                    <DialogButton content={(cancel) => [<EditProfile cancel={cancel} />]}>
+                        <div className="icon-button sm">
+                            <Icons.Edit3 size={16} />
+                        </div>
+                    </DialogButton>
+                </div>
                 <b>{user.name}</b>
-                <div className="position">Striker</div>
+                <div className="position">
+                    {user.position || (
+                        <DialogButton content={(cancel) => [<EditProfile cancel={cancel} />]}>
+                            <div className="row quicklink">
+                                <Icons.Plus size={18} />
+                                <div className="h-spacing--sm"></div>
+                                Your Position
+                            </div>
+                        </DialogButton>
+                    )}
+                </div>
                 <br />
                 <DialogButton content={(c) => [<CreateStats cancel={c} />]}>
                     <div
@@ -140,18 +178,43 @@ const MyStats: React.FC = () => {
                 <br />
                 <br />
                 <div className="stats-teams">
-                    {Object.keys(stats).map(t => {
+                    {Object.keys(stats).sort().map(t => {
                         const team = data.teams.find(_t => _t.id === t);
-                        if (!team) return (<div key={Math.random()} />);
+                        if (!team) return (<div key={Math.random()} style={{ display: 'none' }} />);
                         const stat = stats[t];
                         return (
                             <div key={t} className="stats__team">
                                 <div style={{ background: team.color }} className="top-color" />
-                                <h3>{team.name}</h3>
+                                <h3 className="row h-align--space">
+                                    {team.name}
+                                    <DialogButton content={(cancel) => [<EditTeam id={t} cancel={cancel} />]}>
+                                        <div className="icon-button sm">
+                                            <Icons.Edit3 size={16} />
+                                        </div>
+                                    </DialogButton>
+                                </h3>
                                 <div className="stats__team__stats" style={{
                                     color: team.color
                                 }}>
                                     <div className="goals-wrapper">
+                                        <div className="toggle large">
+                                            <div className="toggle__button icon-button minus" onClick={_ => {
+                                                let _stats = stats;
+                                                _stats[t].goals--;
+                                                setStats({ ...stats, _stats });
+                                                updateGoals(authState, t, -1);
+                                            }}>
+                                                <Icons.Minus />
+                                            </div>
+                                            <div className="toggle__button icon-button plus" onClick={_ => {
+                                                let _stats = stats;
+                                                _stats[t].goals++;
+                                                setStats({ ...stats, _stats });
+                                                updateGoals(authState, t, 1);
+                                            }}>
+                                                <Icons.Plus />
+                                            </div>
+                                        </div>
                                         <div className="goals">
                                             <h2>{stat.goals}</h2>
                                             <div className="desc">Goal{stat.goals === 1 ? '' : 's'}</div>

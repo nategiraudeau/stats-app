@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
         <div className="navbar">
             <div className="left">
                 <Link href="/"><h1 style={{ cursor: 'pointer' }}>
-                    <Icons.BarChart size={38} /> Stats
+                    <Icons.BarChart size={38} /> Soccer Stats
                 </h1></Link>
             </div>
             <div>
@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
                     authState ? (
                         <div>
                             <div className="navbar__links">
-                                <Link href="/mystats"><div className="button">My Stats</div></Link>
+                                <Link href="/mystats"><div className="button">My Statistics</div></Link>
                                 {/* <Dropdown alignment="top-right" button={(
                                     <div className="button" style={{
                                         width: '44px',
@@ -56,13 +56,27 @@ const Navbar: React.FC = () => {
                                     key="user-profile"
                                     actionsOrientation='column'
                                     barrierDismissible
-                                    actions={[
-                                        (<DialogAction key="user-profile__profile">
-                                            <div className="dialog__action__icon">
-                                                <Icons.Edit3 size={18} />
+                                    content={(_) => [
+                                        <div>
+                                            <br />
+                                            <div className="profile-image">
+                                                {user?.pfp ? (
+                                                    <Img src={user?.pfp} alt=""></Img>
+                                                ) : (
+                                                    <h1>{user?.name?.charAt(0)?.toUpperCase()}</h1>
+                                                )}
                                             </div>
-                                            Profile
-                                        </DialogAction>),
+                                        </div>
+                                    ]}
+                                    actions={[
+                                        (<Link href="/mystats">
+                                            <DialogAction key="user-profile__profile">
+                                                <div className="dialog__action__icon">
+                                                    <Icons.User size={18} />
+                                                </div>
+                                                My Profile
+                                            </DialogAction>
+                                        </Link>),
                                         (<DialogAction key="user-profile__logout" onClick={async () => {
                                             setLoading(true);
                                             await logOut();
@@ -77,9 +91,17 @@ const Navbar: React.FC = () => {
                                     ]}>
                                     <div className="button" style={{
                                         width: '44px',
-                                        padding: 0
+                                        padding: 0,
+                                        overflow: 'hidden'
                                     }}>
-                                        {user?.pfp ? (<Img alt="" src={user.pfp} />) : user?.name?.charAt(0)?.toUpperCase()}
+                                        {user?.pfp ? (
+                                            <Img style={{
+                                                width: '36px',
+                                                height: '36px',
+                                                objectFit: 'cover',
+                                                borderRadius: '50%'
+                                            }} alt="" src={user.pfp} />
+                                        ) : user?.name?.charAt(0)?.toUpperCase()}
                                     </div>
                                 </DialogButton>
                             </div>

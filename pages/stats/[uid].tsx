@@ -41,9 +41,9 @@ const PublicStats: React.FC = () => {
                     )}
                 </div>
                 <br />
-                <div className="number">#5</div>
+                {user.number !== undefined && <div className="number">#{user.number}</div>}
                 <b>{user.name}</b>
-                <div className="position">Striker</div>
+                {user.position !== undefined && <div className="position">{user.position}</div>}
                 <br />
             </div>
             <div className="stats-divider"></div>

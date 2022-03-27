@@ -6,6 +6,7 @@ export default interface User {
     name: string,
     pfp?: string,
     position?: string,
+    number?: number,
     stats: {
         [key: string]: Stats
     }

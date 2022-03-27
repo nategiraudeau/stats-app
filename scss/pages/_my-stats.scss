@@ -11,9 +11,21 @@
         gap: 12px;
         width: 180px;
 
+        .quicklink {
+            color: var(--theme-foreground-40);
+            cursor: pointer;
+            font-size: 14px;
+            transition: color var(--theme-transition-fast);
+        }
+
+        .quicklink:hover {
+            color: var(--theme-foreground-20);
+        }
+
         .number {
-            opacity: 0.5;
+            color: var(--theme-foreground-50);
             font-weight: 700;
+            margin-bottom: -7px;
         }
 
         b {
@@ -21,7 +33,7 @@
         }
 
         .position {
-            opacity: 0.4;
+            color: var(--theme-foreground-40);
             font-size: 18px;
         }
     }
@@ -100,10 +112,38 @@
                     height: 120px;
                     align-items: center;
 
+                    .toggle {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        background-color: var(--theme-background-85);
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: flex-start;
+                        transform: translateX(-10%);
+                        gap: 6px;
+                        color: var(--theme-foreground);
+                    }
+
                     .goals-wrapper {
                         width: 100px;
                         border-right: 1px solid var(--theme-foreground-20);
                         margin-right: 24px;
+                        position: relative;
+
+                        .toggle {
+                            opacity: 0;
+                            transition: visibility var(--theme-transition-fast),
+                                opacity var(--theme-transition-fast);
+                        }
+                    }
+
+                    .goals-wrapper:hover {
+                        .toggle {
+                            opacity: 1;
+                        }
                     }
 
                     .goals {
@@ -130,6 +170,7 @@
                             align-items: center;
                             margin-bottom: 15px;
                             opacity: 0.8;
+                            position: relative;
 
                             h2 {
                                 font-size: 28px;
@@ -230,6 +271,7 @@
     margin-bottom: 16px;
     overflow: hidden;
     position: relative;
+    cursor: default;
 
     h1 {
         font-size: 44px;
@@ -258,13 +300,14 @@
 
     .edit-button {
         position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
+        bottom: 2px;
         justify-content: center;
         gap: 6px;
         font-size: 12px;
-        opacity: 0.6;
+        opacity: 1;
+        background: var(--theme-background-40);
+        border-radius: 20px;
+        padding: 6px 12px;
     }
 }
 

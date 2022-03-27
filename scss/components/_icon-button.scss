@@ -19,6 +19,12 @@
     box-sizing: border-box;
 }
 
+.icon-button.sm {
+    width: 28px;
+    height: 28px;
+    box-sizing: border-box;
+}
+
 .icon-button:hover {
     background: var(--theme-foreground-8);
 }

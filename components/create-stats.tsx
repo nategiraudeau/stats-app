@@ -147,6 +147,12 @@ const CreateStats: React.FC<{ cancel: () => void }> = ({ cancel }) => {
                                 } catch (e) { setLoading(false); return; }
 
                                 cancel();
+                                setName("");
+                                setColor("");
+                                setGoals(undefined);
+                                setGames(undefined);
+                                setAssists(undefined);
+                                setI(0);
                                 setLoading(false);
                                 return;
                             }
