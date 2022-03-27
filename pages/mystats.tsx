@@ -132,7 +132,7 @@ const MyStats: React.FC = () => {
                             opacity: 0.5,
                             whiteSpace: 'nowrap'
                         }}>
-                            https://pro-stats.vercel.app/stats/{authState}
+                            https://soccer-stats-seven.vercel.app/stats/{authState}
                         </small>
                         <br />
                     </div>
@@ -141,7 +141,7 @@ const MyStats: React.FC = () => {
                         Cancel
                     </DialogAction>),
                     (<DialogAction primary onClick={() => {
-                        copyTextToClipboard(`https://pro-stats.vercel.app/stats/${authState}`);
+                        copyTextToClipboard(`https://soccer-stats-seven.vercel.app/stats/${authState}`);
                     }}>
                         <Icons.Link2 size={20} />
                         <div className="h-spacing"></div>

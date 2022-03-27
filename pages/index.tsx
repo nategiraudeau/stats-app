@@ -8,6 +8,7 @@ const Landing: React.FC = () => {
         <div className='column' style={{
             marginTop: '20px'
         }}>
+            <br />
             <h1 style={{ fontSize: '68px', marginBottom: 0, textAlign: 'center' }}>Keep track of your soccer stats</h1>
             <br />
             <p style={{
