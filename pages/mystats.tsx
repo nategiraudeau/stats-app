@@ -128,7 +128,7 @@ const MyStats: React.FC = () => {
                         <h3>Copy the link to share</h3>
                         <br />
                         <small style={{
-                            fontSize: '12px',
+                            fontSize: '10px',
                             opacity: 0.5,
                             whiteSpace: 'nowrap'
                         }}>
